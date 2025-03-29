@@ -24,11 +24,14 @@ pipeline{
         stage("Build"){
             steps{
                 script{
-                    docker_build("notes-app","latest","pisal23")
+                    echo "Starting Docker build..."
+                    sh "ls -lah"  // List files to check Dockerfile presence
+                    sh "docker build -t pisal23/notes-app:latest ."
+                    echo "Docker build completed!"
                 }
-                
             }
         }
+
         stage("Push to DockerHub"){
             steps{
                 script{
